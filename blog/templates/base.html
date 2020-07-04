@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+{% include "head.html" %}
+<body>
+{% include 'header.html' %}
+    {% if messages %}
+       {% for message in messages %}
+       <div class="alert alert-{{ message.tags }}" >
+           {{ message }}
+       </div>
+       {% endfor %}
+    {% endif %}
+{% block content %}
+{% endblock content %}
+
+{% include 'footer.html' %}
+
+{% include 'scripts.html' %}
+</body>
+
+</html>

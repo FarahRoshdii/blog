@@ -1,0 +1,77 @@
+   {% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+      <div class="row">
+        <!-- Latest Posts -->
+        <main class="post blog-post col-lg-8">
+          <div class="container">
+            <div class="post-single">
+
+              <div class="post-details">
+                <div class="post-meta d-flex justify-content-between">
+                  <div class="category">
+                    {% for gen in Post.genre.all %}
+                    <a href="#">{{ gen }}</a>
+                    {% endfor %}
+                  </div>
+                </div>
+                <h1>{{ Post.title }}<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
+                <div class="post-footer d-flex align-items-center flex-column flex-sm-row"><a href="#" class="author d-flex align-items-center flex-wrap">
+                    <div class="avatar"><img src=" {{ post.author.profile_picture.url }}" alt="..." class="img-fluid"></div>
+                    <div class="title"><span>{{ post.author.user.username }}</span></div></a>
+                  <div class="d-flex align-items-center flex-wrap">
+                    <div class="date"><i class="icon-clock"></i>{{post.timestamp| timesince}}ago</div>
+                    <div class="comments meta-last"><i class="icon-comment"></i>{{ post.comments_count}}</div>
+                  </div>
+                </div>
+                <div class="post-body">
+                  <p class="lead">{{ post.description }}</p>
+                <div class="post-tags"><a href="#" class="tag">#Business</a><a href="#" class="tag">#Tricks</a><a href="#" class="tag">#Financial</a><a href="#" class="tag">#Economy</a></div>
+                <div class="post-comments">
+                  <header>
+                    <h3 class="h6">Post Comments<span class="no-of-comments">{{ post.get_comments_count }}</span></h3>
+                  </header>
+                  {% for comment in post.get_comments %}
+                  <div class="comment">
+                    <div class="comment-header d-flex justify-content-between">
+                      <div class="user d-flex align-items-center">
+                        <div class="image"><img src="img/user.svg" alt="..." class="img-fluid rounded-circle"></div>
+                        <div class="title"><strong>{{ comment.user.username }}</strong><span class="date"></span></div>
+                      </div>
+                    </div>
+                    <div class="comment-body">
+                      <p>{{ comment.content }}</p>
+                    </div>
+                    {% endfor %}
+                  </div>
+                    <div class="comment-body">
+                    </div>
+                  </div>
+                </div>
+                <div class="add-comment">
+                  <header>
+                    <h3 class="h6">Leave a reply</h3>
+                  </header>
+                  <form method="POST" action="." class="commenting-form">
+                    {% csrf_token %}
+
+                    <div class="row">
+
+                      <div class="form-group col-md-12">
+                        {{ form }}
+                        <textarea name="usercomment" id="usercomment" placeholder="Type your comment" class="form-control"></textarea>
+                      </div>
+                      <div class="form-group col-md-12">
+                        <button type="submit" class="btn btn-secondary">Submit Comment</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div></main>
+      </div>
+    </div>
+{% endblock content %}

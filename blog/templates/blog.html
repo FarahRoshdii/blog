@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container">
+      <div class="row">
+        <!-- Latest Posts -->
+        <main class="posts-listing col-lg-8">
+          <div class="container">
+            <div class="row">
+              <!-- post -->
+              {% for post in postList %}
+              <div class="post col-xl-6">
+                <div class="post-details">
+                  <div class="post-meta d-flex justify-content-between">
+                    {% for gen in post.genre.all %}
+                    <div class="category"><a href="#">{{ gen }}</a></div>
+                    {% endfor %}
+                  </div>
+                    <h3 class="h4">{{ post.title }}</h3></a>
+                  <p class="text-muted">{{ post.description }}</p>
+                  <div class="post-footer d-flex align-items-center">
+                    <a href="#" class="author d-flex align-items-center flex-wrap">
+                      <div class="title"><span>{{ post.author.user.username }}</span></div></a>
+                    <div class="date"><i class="icon-clock"></i>{{ post.timestamp| timesince }}ago </div>
+                    <div class="comments meta-last"><i class="icon-comment"></i>{{ post.comment_count }}</div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+
+
+    <!-- Page Footer-->
+  {% endblock content %}

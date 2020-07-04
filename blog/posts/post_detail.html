@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<article class="media content-section">
+    <img class="article.img" src="{{ object.author.profile_picture.url }}">
+    <div class="media-body">
+        <div class="article-metadata">
+        <a class="mr-2" href="#">{{ object.author.user.username }}</a>
+            <small class="text-muted">{{ object.timestamp|timesince}}ago</small>
+         </div>
+        <h2 class="article-title">{{ object.title }}</h2>
+ {% for comment in post.get_comments %}
+                  <div class="comment">
+                    <div class="comment-header d-flex justify-content-between">
+                      <div class="user d-flex align-items-center">
+                        <div class="image"><img src="img/user.svg" alt="..." class="img-fluid rounded-circle"></div>
+                        <div class="title"><strong>{{ comment.user.username }}</strong><span class="date"></span></div>
+                      </div>
+                    </div>
+                    <div class="comment-body">
+                      <p>{{ comment.content }}</p>
+                    </div>
+                    {% endfor %}
+        <p class="article-content">{{ object.content }}</p>
+    </div>
+</article>
+{% endblock content %}
